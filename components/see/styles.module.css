@@ -1,0 +1,53 @@
+.activities_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.one_activity {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 45% 45% 10%;
+  align-items: center;
+}
+
+.one_activity > button > svg {
+  pointer-events: none;
+}
+.one_traveller > button > svg {
+  pointer-events: none;
+}
+.travellers_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.one_traveller {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 45% 45% 10%;
+  align-items: center;
+}
+
+.stats_container {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 5rem 12rem;
+}
+
+.heading {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.sub_container > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

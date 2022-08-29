@@ -1,0 +1,22 @@
+.create_container {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  justify-content: center;
+}
+
+.sub_container {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-bottom: 2rem;
+}
+
+.create_container > h1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.heading {
+  text-transform: uppercase;
+}

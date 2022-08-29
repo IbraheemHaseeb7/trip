@@ -1,0 +1,26 @@
+.main_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main_container > div {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main_container > div > button {
+  flex-grow: 1;
+  padding: 0.5rem 0;
+  background-color: #eaeaea;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.main_container > div > button:not(:first-of-type) {
+  border-left: 1px solid #b4b4b4;
+}

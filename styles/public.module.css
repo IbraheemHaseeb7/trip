@@ -1,0 +1,30 @@
+.main_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.brief_intro {
+  width: 80%;
+  padding: 0 1rem;
+  background-color: #eaeaea;
+}
+
+.brief_intro > p {
+  font-weight: 500;
+}
+
+.brief_intro > p > span {
+  font-weight: 300;
+}
+
+.bottom_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2rem 0;
+}

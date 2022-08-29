@@ -1,0 +1,35 @@
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.home_container {
+  width: 20rem;
+  height: 20rem;
+  background-color: #eaeaea;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 5px 10px #e0e0e0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.home_container:hover {
+  width: 19rem;
+  height: 19rem;
+}
+
+.icon_container > svg {
+  font-size: 10rem;
+  color: #cccccc;
+}
+
+.heading {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}

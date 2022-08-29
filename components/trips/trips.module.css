@@ -1,0 +1,62 @@
+.main_container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.main_container > h2 {
+  align-self: flex-start;
+}
+
+.trips_container {
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.trip {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eaeaea;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.trip:hover {
+  transform: scale(0.98);
+}
+
+.trip > h3 {
+  margin: 1rem;
+}
+
+.trip > span {
+  margin: 1rem;
+  padding: 0rem 0.5rem 0.25rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  font-weight: 600;
+  color: #000000bd;
+}
+
+.planning {
+  background-color: #ffb6ff80;
+}
+
+.inprogress {
+  background-color: #85d2ff80;
+}
+
+.completed {
+  background-color: #85ffaa80;
+}

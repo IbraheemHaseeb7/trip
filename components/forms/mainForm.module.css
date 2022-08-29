@@ -1,0 +1,46 @@
+.form_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.sub {
+  text-transform: uppercase;
+  justify-self: start;
+}
+
+.travelling_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.activity_container {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.traveller_container {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.heading {
+  text-transform: uppercase;
+}
+
+.status_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.status_container > div,
+.status_container > div > input,
+.status_container > div > label {
+  cursor: pointer;
+}
