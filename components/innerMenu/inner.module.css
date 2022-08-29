@@ -28,3 +28,7 @@
 .main_container > div:hover {
   transform: scale(0.98);
 }
+
+.expenditure_container {
+  cursor: pointer;
+}

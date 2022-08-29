@@ -82,7 +82,8 @@ export default function Public({ trip }) {
           dispatch={dispatch}
           options={options}
         />
-        <InnerMenu dataList={trip[state?.inner]} />
+        {}
+        <InnerMenu dataList={trip[state?.inner]} type={state?.inner} />
       </div>
     </div>
   );
