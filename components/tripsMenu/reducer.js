@@ -10,5 +10,10 @@ export function reducer(state, action) {
         ...state,
         inner: action.payload,
       };
+    case "open":
+      return {
+        ...state,
+        open: !state.open,
+      };
   }
 }

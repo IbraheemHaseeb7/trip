@@ -23,31 +23,40 @@ export default function InnerMenu({ dataList, type }) {
   );
 }
 
-const expenses = [
-  {
-    name: "eating",
-    src: "",
-    id: 1,
-    cost: 10000,
-    waqt: "1300",
-    date: "16 March, 2022",
-  },
-];
-
 function Expenditure({ dataList }) {
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState({
+    name: "",
+    cost: 0,
+    waqt: "",
+    date: "",
+    src: "",
+  });
 
   return (
     <>
       <div
         className={`${styles.main_container} ${styles.expenditure_container}`}
-        onClick={() => {
-          setOpen(!open);
-        }}
       >
-        {expenses?.map(({ name, id, cost, phoneNumber }) => {
+        {dataList?.map(({ name, id, cost, phoneNumber }) => {
           return (
-            <div key={id}>
+            <div
+              key={id}
+              onClick={(event) => {
+                setOpen(!open);
+                const array = expenses?.filter((e) => {
+                  return e.id == event.target.title;
+                });
+                setData({
+                  name: array[0].name,
+                  cost: array[0].cost,
+                  waqt: array[0].waqt,
+                  date: array[0].date,
+                  src: array[0].src,
+                });
+              }}
+              title={id}
+            >
               <h2>{name}</h2>
               {cost !== undefined ? <p>Rs: {cost}</p> : <p>0{phoneNumber}</p>}
             </div>
@@ -56,10 +65,13 @@ function Expenditure({ dataList }) {
       </div>
       {open && (
         <Popup
-          name={"Eating"}
-          cost={10000}
-          waqt={"1300"}
-          date={"16 March, 2022"}
+          name={data.name}
+          cost={data.cost}
+          waqt={data.waqt}
+          date={data.date}
+          src={data.src}
+          setOpen={setOpen}
+          open={open}
         />
       )}
     </>

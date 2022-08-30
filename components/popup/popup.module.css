@@ -1,0 +1,95 @@
+.main_container {
+  width: 70%;
+  min-height: 50vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 0 15px #555555;
+  z-index: 4;
+}
+
+.main_container > h1 {
+  text-transform: capitalize;
+}
+
+.data_container {
+  width: 90%;
+  background-color: #eaeaea;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.data_container > p {
+  font-weight: 500;
+  margin: 0;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.data_container > p:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.data_container > p > span {
+  font-weight: 300;
+}
+
+.shadow {
+  width: 100%;
+  height: 100vh;
+  background-color: #55555560;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.proof_container {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.proof_container:hover {
+  transform: scale(0.98);
+}
+
+.proof_img {
+  width: 90%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.image_container {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 7;
+}
+
+.image_shadow {
+  width: 100%;
+  height: 100vh;
+  background-color: #55555560;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 6;
+}
