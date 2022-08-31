@@ -1,42 +1,48 @@
 import styles from "../../styles/admin.module.css";
-import { getDoc, doc, getDocs, collection } from "firebase/firestore";
+import {
+  getDoc,
+  doc,
+  getDocs,
+  collection,
+  onSnapshot,
+} from "firebase/firestore";
 import { firestore } from "../../libraries/firebase";
 import InnerMenu from "../../components/innerMenu/innerMenu";
 import TripsMenu from "../../components/tripsMenu/tripsMenu";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { reducer } from "../../components/tripsMenu/reducer";
 import { useRouter } from "next/router";
 import AdminForm from "../../components/adminForm/adminForm";
 
-export async function getStaticProps(route) {
-  let trip = [];
+// export async function getStaticProps(route) {
+//   let trip = [];
 
-  await getDoc(doc(firestore, `trips`, route.params.trip)).then((res) => {
-    trip = res.data();
-  });
+//   await getDoc(doc(firestore, `trips`, route.params.trip)).then((res) => {
+//     trip = res.data();
+//   });
 
-  return {
-    props: {
-      trip: trip,
-      revalidate: 1000,
-    },
-  };
-}
+//   return {
+//     props: {
+//       trip: trip,
+//       revalidate: 1000,
+//     },
+//   };
+// }
 
-export async function getStaticPaths() {
-  let paths = [];
-  await getDocs(collection(firestore, `trips`)).then((res) => {
-    paths = res.docs.map((res) => {
-      const { id } = res.data();
-      return { params: { trip: id } };
-    });
-  });
+// export async function getStaticPaths() {
+//   let paths = [];
+//   await getDocs(collection(firestore, `trips`)).then((res) => {
+//     paths = res.docs.map((res) => {
+//       const { id } = res.data();
+//       return { params: { trip: id } };
+//     });
+//   });
 
-  return {
-    paths: paths,
-    fallback: "blocking",
-  };
-}
+//   return {
+//     paths: paths,
+//     fallback: "blocking",
+//   };
+// }
 
 const options = [
   { name: "activities", id: 1 },
@@ -50,12 +56,19 @@ const formsOptions = [
   { name: "Expenditure", id: 3 },
 ];
 
-export default function Admin({ trip }) {
+export default function Admin() {
   const [state, dispatch] = useReducer(reducer, {
     type: "activities",
     formType: "activities",
+    data: [],
   });
   const router = useRouter();
+
+  useEffect(() => {
+    onSnapshot(doc(firestore, "trips", router.query.trip), (res) => {
+      dispatch({ type: "get_data", payload: res.data() });
+    });
+  }, [router.query.trip]);
 
   return (
     <div className={styles.main_container}>
@@ -67,7 +80,7 @@ export default function Admin({ trip }) {
           dispatchType="admin_portal"
         />
         <InnerMenu
-          dataList={trip[state?.type]}
+          dataList={state.data[state?.type]}
           type={state.type}
           admin={router.route.substring(8)}
         />
@@ -79,7 +92,7 @@ export default function Admin({ trip }) {
           dispatch={dispatch}
           dispatchType="admin_form"
         />
-        <AdminForm formType={state.formType} />
+        <AdminForm formType={state.formType} trip={state.data} />
       </div>
     </div>
   );

@@ -25,5 +25,10 @@ export function reducer(state, action) {
         ...state,
         open: !state.open,
       };
+    case "get_data":
+      return {
+        ...state,
+        data: action.payload,
+      };
   }
 }

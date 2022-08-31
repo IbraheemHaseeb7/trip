@@ -1,0 +1,35 @@
+.main_container {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+.main_container > input {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-bottom: 2px solid #eaeaea;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.main_container > input:hover,
+.main_container > input:focus {
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #eaeaea;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin: 1rem;
+  align-self: center;
+}
+
+.btn:hover {
+  background-color: #d9d9d9;
+}
