@@ -7,6 +7,7 @@ import TripsMenu from "../../components/tripsMenu/tripsMenu";
 import InnerMenu from "../../components/innerMenu/innerMenu";
 import { AuthProvider } from "../_app";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export async function getStaticProps(route) {
   let trip = [];
@@ -91,9 +92,11 @@ export default function Public({ trip }) {
         <InnerMenu dataList={trip[state?.inner]} type={state?.inner} />
       </div>
       <div className={styles.buttons_container}>
-        <button type="button" className={styles.btn}>
-          Admin Portal
-        </button>
+        <Link href={`/${trip.id}/admin`}>
+          <button type="button" className={styles.btn}>
+            Admin Portal
+          </button>
+        </Link>
         <button
           type="button"
           className={styles.btn}
