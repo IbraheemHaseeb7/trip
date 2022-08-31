@@ -1,0 +1,19 @@
+.trips_manager {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main_container > h1 {
+  text-align: center;
+}
+
+.forms_manager {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

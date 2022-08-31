@@ -32,3 +32,16 @@
 .expenditure_container {
   cursor: pointer;
 }
+
+.btn {
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #d9d9d9;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  background-color: #bebebe;
+}

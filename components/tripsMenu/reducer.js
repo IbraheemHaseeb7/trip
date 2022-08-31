@@ -10,6 +10,16 @@ export function reducer(state, action) {
         ...state,
         inner: action.payload,
       };
+    case "admin_portal":
+      return {
+        ...state,
+        type: action.payload,
+      };
+    case "admin_form":
+      return {
+        ...state,
+        formType: action.payload,
+      };
     case "open":
       return {
         ...state,

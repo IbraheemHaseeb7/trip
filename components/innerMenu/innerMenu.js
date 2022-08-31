@@ -2,7 +2,7 @@ import { useState } from "react";
 import Popup from "../popup/popup";
 import styles from "./inner.module.css";
 
-export default function InnerMenu({ dataList, type }) {
+export default function InnerMenu({ dataList, type, admin }) {
   return (
     <>
       {type !== "expenditure" ? (
@@ -11,7 +11,15 @@ export default function InnerMenu({ dataList, type }) {
             return (
               <div key={id}>
                 <h2>{name}</h2>
-                {cost !== undefined ? <p>Rs: {cost}</p> : <p>0{phoneNumber}</p>}
+                {admin === "admin" ? (
+                  <button className={styles.btn} type="button">
+                    Delete
+                  </button>
+                ) : cost !== undefined ? (
+                  <p>Rs: {cost}</p>
+                ) : (
+                  <p>0{phoneNumber}</p>
+                )}
               </div>
             );
           })}
