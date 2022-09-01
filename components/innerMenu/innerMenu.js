@@ -1,8 +1,30 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import Popup from "../popup/popup";
 import styles from "./inner.module.css";
 
 export default function InnerMenu({ dataList, type, admin }) {
+  const router = useRouter();
+
+  async function deleteItem(e) {
+    e.preventDefault();
+    const data = dataList.filter(({ id }) => {
+      return id !== e.target.value;
+    });
+
+    const body = {
+      type: type,
+      data: data,
+      id: router.query?.trip,
+    };
+    const final = JSON.stringify(body);
+    await fetch("/api/deleteAdminForm", {
+      method: "PUT",
+      body: final,
+    });
+  }
+
   return (
     <>
       {type !== "expenditure" ? (
@@ -12,7 +34,18 @@ export default function InnerMenu({ dataList, type, admin }) {
               <div key={id}>
                 <h2>{name}</h2>
                 {admin === "admin" ? (
-                  <button className={styles.btn} type="button">
+                  <button
+                    className={styles.btn}
+                    type="button"
+                    value={id}
+                    onClick={(e) => {
+                      toast.promise(deleteItem(e), {
+                        loading: "Proccessing Request...",
+                        success: "Successfully Deleted Item",
+                        error: "Unknown Error Occurred",
+                      });
+                    }}
+                  >
                     Delete
                   </button>
                 ) : cost !== undefined ? (

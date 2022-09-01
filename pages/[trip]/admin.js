@@ -65,10 +65,10 @@ export default function Admin() {
   const router = useRouter();
 
   useEffect(() => {
-    onSnapshot(doc(firestore, "trips", router.query.trip), (res) => {
+    onSnapshot(doc(firestore, "trips", router.query?.trip), (res) => {
       dispatch({ type: "get_data", payload: res.data() });
     });
-  }, [router.query.trip]);
+  }, [router.query?.trip]);
 
   return (
     <div className={styles.main_container}>

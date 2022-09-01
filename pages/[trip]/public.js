@@ -56,7 +56,7 @@ export default function Public({ trip }) {
   });
 
   trip?.activities?.forEach((value) => {
-    sum = sum + value.cost;
+    sum = sum + Number(value.cost);
   });
 
   return (

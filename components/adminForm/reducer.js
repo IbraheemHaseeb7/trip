@@ -8,6 +8,9 @@ export function reducer(state, action) {
         },
       };
     case "activities_submit":
-      return {};
+      return {
+        ...state,
+        activities: { id: "", name: "", cost: "" },
+      };
   }
 }
