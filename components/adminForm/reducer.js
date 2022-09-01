@@ -24,5 +24,13 @@ export function reducer(state, action) {
         ...state,
         travellers: { id: "", name: "", phoneNumber: "" },
       };
+    case "expenditure":
+      return {
+        ...state,
+        expenditure: {
+          ...state?.expenditure,
+          [action.payload.name]: action.payload.value,
+        },
+      };
   }
 }
