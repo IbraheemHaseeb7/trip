@@ -12,5 +12,17 @@ export function reducer(state, action) {
         ...state,
         activities: { id: "", name: "", cost: "" },
       };
+    case "travellers":
+      return {
+        travellers: {
+          ...state?.travellers,
+          [action.payload.name]: action.payload.value,
+        },
+      };
+    case "travellers_submit":
+      return {
+        ...state,
+        travellers: { id: "", name: "", phoneNumber: "" },
+      };
   }
 }

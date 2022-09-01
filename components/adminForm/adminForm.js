@@ -9,7 +9,10 @@ import { useRouter } from "next/router";
 export default function AdminForm({ formType, trip }) {
   const [state, dispatch] = useReducer(reducer, {
     activities: { id: "", name: "", cost: "" },
+    travellers: { id: "", name: "", phoneNumber: "" },
+    expenditure: { name: "", id: "", cost: "", src: "", waqt: "", date: "" },
   });
+
   const router = useRouter();
   return (
     <form className={styles.main_container}>
