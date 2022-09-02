@@ -1,5 +1,8 @@
 import { useState } from "react";
 import styles from "./expForm.module.css";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../../libraries/firebase";
+import toast from "react-hot-toast";
 
 export default function ExpForm({ state, dispatch, trip, id }) {
   const inputs = [
@@ -10,6 +13,7 @@ export default function ExpForm({ state, dispatch, trip, id }) {
   ];
 
   const [imageFile, setImageFile] = useState("");
+  const [progress, setProgress] = useState(0);
 
   function handleChange(e) {
     dispatch({
@@ -18,12 +22,37 @@ export default function ExpForm({ state, dispatch, trip, id }) {
     });
   }
 
-  function handleFile(e) {
+  async function handleFile(e) {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
     const blob = URL.createObjectURL(new Blob([file]));
     setImageFile(blob);
+    return file;
   }
+
+  async function uploadImage(file) {
+    const proofId = new Date().getTime().toString();
+
+    const uploader = uploadBytesResumable(
+      ref(storage, `${id}/${proofId}`),
+      file
+    );
+    uploader.on(
+      "state_changed",
+      (e) => {
+        setProgress((e.bytesTransferred / e.totalBytes) * 100);
+      },
+      (err) => {},
+      (suc) => {
+        getDownloadURL(ref(storage, `${id}/${proofId}`)).then((res) => {
+          toast.success("Successfully Uploaded");
+          dispatch({ type: "image_link", payload: { link: res, id: proofId } });
+        });
+      }
+    );
+  }
+
+  console.log(state.expenditure);
 
   function resetImage(e) {
     e.preventDefault();
@@ -59,7 +88,10 @@ export default function ExpForm({ state, dispatch, trip, id }) {
           onChange={handleFile}
           onDrag={handleFile}
           onDragOver={handleFile}
-          onDrop={handleFile}
+          onDrop={async (e) => {
+            const file = await handleFile(e);
+            await uploadImage(file);
+          }}
         >
           Drag and Drop Image here or Click to Add Image
           {imageFile && (
@@ -68,6 +100,9 @@ export default function ExpForm({ state, dispatch, trip, id }) {
               <button onClick={resetImage} type="button">
                 Reset
               </button>
+              <div className={styles.loading}>
+                <div style={{ width: `${progress}%` }}></div>
+              </div>
             </>
           )}
         </label>

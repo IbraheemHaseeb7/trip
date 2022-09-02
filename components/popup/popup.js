@@ -27,7 +27,7 @@ export default function Popup({ name, cost, waqt, date, src, setOpen, open }) {
             <>
               <img
                 className={styles.proof_img}
-                src={src}
+                src={src.link}
                 alt={name}
                 onClick={() => {
                   setImg(!img);
@@ -39,7 +39,7 @@ export default function Popup({ name, cost, waqt, date, src, setOpen, open }) {
           )}
         </div>
       </div>
-      {img && <Img src={src} img={img} setImg={setImg} />}
+      {img && <Img src={src.link} img={img} setImg={setImg} />}
       <div className={styles.shadow} onClick={() => setOpen(!open)}></div>
     </>
   );

@@ -10,7 +10,14 @@ export default function AdminForm({ formType, trip }) {
   const [state, dispatch] = useReducer(reducer, {
     activities: { id: "", name: "", cost: "" },
     travellers: { id: "", name: "", phoneNumber: "" },
-    expenditure: { name: "", id: "", cost: "", src: "", waqt: "", date: "" },
+    expenditure: {
+      name: "",
+      id: "",
+      cost: "",
+      src: { link: "", id: "" },
+      waqt: "",
+      date: "",
+    },
   });
 
   const router = useRouter();

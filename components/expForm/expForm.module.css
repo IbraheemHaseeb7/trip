@@ -82,3 +82,21 @@
 .btn:hover {
   background-color: #d9d9d9;
 }
+
+.loading {
+  position: absolute;
+  top: 102%;
+  left: 0;
+  width: 100%;
+  height: 1.5rem;
+  background-color: #eaeaea;
+}
+
+.loading > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.5rem;
+  background-color: #6eff6e;
+  transition: all 0.25s ease;
+}

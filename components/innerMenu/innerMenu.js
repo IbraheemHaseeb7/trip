@@ -71,7 +71,7 @@ function Expenditure({ dataList }) {
     cost: 0,
     waqt: "",
     date: "",
-    src: "",
+    src: { link: "", id: "" },
   });
 
   return (
