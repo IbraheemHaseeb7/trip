@@ -66,5 +66,33 @@ export function reducer(state, action) {
           src: { link: action.payload.link, id: action.payload.id },
         },
       };
+    case "image_reset":
+      return {
+        ...state,
+        expenditure: {
+          ...state.expenditure,
+          src: { link: "", id: "" },
+        },
+      };
+    case "reset_expenditure":
+      return {
+        ...state,
+        expenditure: {
+          name: "",
+          cost: "",
+          src: { link: "", id: "" },
+          waqt: "",
+          date: "",
+          id: "",
+        },
+      };
+    case "add_id":
+      return {
+        ...state,
+        expenditure: {
+          ...state.expenditure,
+          id: action.payload,
+        },
+      };
   }
 }

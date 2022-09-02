@@ -1,15 +1,21 @@
 import { useState } from "react";
 import styles from "./expForm.module.css";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from "../../libraries/firebase";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { firestore, storage } from "../../libraries/firebase";
 import toast from "react-hot-toast";
+import { doc, updateDoc } from "firebase/firestore";
 
 export default function ExpForm({ state, dispatch, trip, id }) {
   const inputs = [
-    { name: "name", value: state.expediture?.name, id: 1, type: "name" },
-    { name: "cost", value: state.expediture?.cost, id: 2, type: "number" },
-    { name: "waqt", value: state.expediture?.waqt, id: 3, type: "number" },
-    { name: "date", value: state.expediture?.date, id: 4, type: "date" },
+    { name: "name", value: state.expenditure?.name, id: 1, type: "name" },
+    { name: "cost", value: state.expenditure?.cost, id: 2, type: "number" },
+    { name: "waqt", value: state.expenditure?.waqt, id: 3, type: "number" },
+    { name: "date", value: state.expenditure?.date, id: 4, type: "date" },
   ];
 
   const [imageFile, setImageFile] = useState("");
@@ -52,12 +58,38 @@ export default function ExpForm({ state, dispatch, trip, id }) {
     );
   }
 
-  console.log(state.expenditure);
-
-  function resetImage(e) {
+  async function resetImage(e) {
     e.preventDefault();
     setImageFile("");
+    await deleteObject(ref(storage, `${id}/${state.expenditure.src.id}`))
+      .then((res) => {
+        toast.success("Successfully Removed");
+      })
+      .catch(() => {
+        toast.error("Unknown Error Occurred");
+      });
+    dispatch({ type: "image_reset" });
   }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const expId = new Date().getTime().toString();
+    dispatch({ type: "add_id", payload: expId });
+    const array = trip.expenditure;
+    array.push(state.expenditure);
+    await updateDoc(doc(firestore, `trips`, id), {
+      expenditure: array,
+    })
+      .then(() => {
+        toast.success("Successfully added new expenditure");
+      })
+      .catch(() => {
+        toast.error("Some unknown error occurred");
+      });
+    dispatch({ type: "reset_expenditure" });
+  }
+
+  console.log(state.expenditure);
 
   return (
     <div className={styles.main_container}>
@@ -107,7 +139,7 @@ export default function ExpForm({ state, dispatch, trip, id }) {
           )}
         </label>
       </div>
-      <button className={styles.btn} type="button">
+      <button onClick={handleSubmit} className={styles.btn} type="button">
         Submit
       </button>
     </div>

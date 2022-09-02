@@ -58,17 +58,21 @@ export default function InnerMenu({ dataList, type, admin }) {
           })}
         </div>
       ) : (
-        <Expenditure dataList={dataList} />
+        <Expenditure
+          dataList={dataList}
+          deleteItem={deleteItem}
+          admin={admin}
+        />
       )}
     </>
   );
 }
 
-function Expenditure({ dataList }) {
+function Expenditure({ dataList, deleteItem, admin }) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({
     name: "",
-    cost: 0,
+    cost: "",
     waqt: "",
     date: "",
     src: { link: "", id: "" },
@@ -84,8 +88,9 @@ function Expenditure({ dataList }) {
             <div
               key={id}
               onClick={(event) => {
+                if (admin) return;
                 setOpen(!open);
-                const array = expenses?.filter((e) => {
+                const array = dataList?.filter((e) => {
                   return e.id == event.target.title;
                 });
                 setData({
@@ -99,7 +104,26 @@ function Expenditure({ dataList }) {
               title={id}
             >
               <h2>{name}</h2>
-              {cost !== undefined ? <p>Rs: {cost}</p> : <p>0{phoneNumber}</p>}
+              {admin === "admin" ? (
+                <button
+                  className={styles.btn}
+                  type="button"
+                  value={id}
+                  onClick={(e) => {
+                    toast.promise(deleteItem(e), {
+                      loading: "Proccessing Request...",
+                      success: "Successfully Deleted Item",
+                      error: "Unknown Error Occurred",
+                    });
+                  }}
+                >
+                  Delete
+                </button>
+              ) : cost !== undefined ? (
+                <p>Rs: {cost}</p>
+              ) : (
+                <p>0{phoneNumber}</p>
+              )}
             </div>
           );
         })}
